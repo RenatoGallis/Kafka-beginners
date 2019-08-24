@@ -6,6 +6,7 @@
   
   <dependencies>
  
+ 
  <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->
 	<dependency>
 	    <groupId>org.apache.kafka</groupId>
@@ -19,7 +20,16 @@
 	    <artifactId>slf4j-simple</artifactId>
 	    <version>1.7.26</version>
 	</dependency>
+	
+
+<dependency>
+      <groupId>com.twitter</groupId>
+      <artifactId>hbc-core</artifactId> 
+      <version>2.2.0</version> 
+  </dependency>
    
  
   </dependencies>
+
+
 </project>

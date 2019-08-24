@@ -33,11 +33,11 @@ public class ConsumerDemoThreads {
 		//variavel do topico:
 		String topic = "frist_topic";
 		//Trava para para o consumer
-		CountDownLatch trava = new CountDownLatch(1);
+		 CountDownLatch trava = new CountDownLatch(1);
 		
 		//Criando o consumidor com a thread
 		logger.info("Criando minha thread de consumer");
-		 Runnable myConsumerThread = new ConsumerThreads(trava,
+	Runnable myConsumerThread = new ConsumerThreads(trava,
 														topic, 
 														bootstrapserver, groupID, 
 														auto_offset_reset_config);

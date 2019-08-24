@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;ConsumerDemo.java&apos; to &apos;com.github.renatogallis.kafka.tutorial1.ConsumerDemo.java&apos;&#x0D;&#x0A;- Original project: &apos;kafka-beginners-course&apos;&#x0D;&#x0A;- Destination element: &apos;com.github.renatogallis.kafka.tutorial1.ConsumerDemo.java&apos;&#x0D;&#x0A;- Original element: &apos;com.github.renatogallis.kafka.tutorial1.ConsumerDemo.java&apos;" description="Copy compilation unit" destination="/src\/main\/java&lt;com.github.renatogallis.kafka.tutorial1{ConsumerDemo.java" element1="/src\/main\/java&lt;com.github.renatogallis.kafka.tutorial1{ConsumerDemo.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1564241675212" units="1" version="1.0"/>
+</session>

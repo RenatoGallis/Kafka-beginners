@@ -38,7 +38,6 @@ public class ConsumerDemoGroups {
 		KafkaConsumer<String,String> consumer = new KafkaConsumer<String, String>(properties);//Criando o consumidor com o tipo de dado String e passando as propridades acima como configuração
 		consumer.subscribe(Arrays.asList(topic));// o metodo Arrays.asList da a capacidade de consumir de varios tópicos distintos
 		//Termino da criação e atrelar o consumer a um topico
-		
 		//poll data
 		while (true) {//o while = true é uma má pratica
 			//Criando um consumer records para pegar a mensagem que esta sendo pesquisada de 100 mils em 100 mils
@@ -51,8 +50,8 @@ public class ConsumerDemoGroups {
 						+ "Partition:" + record.partition() + "\n"
 						+ "Offset:" + record.offset());
 			}	
-		}
-		//finish
+			
+		}//finish
 	}
 
 }
