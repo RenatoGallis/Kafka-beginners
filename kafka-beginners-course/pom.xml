@@ -2,6 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.renatogallis</groupId>
   <artifactId>kafka-beginners-course</artifactId>
+  <packaging>pom</packaging>
   <version>1</version>
   
   <dependencies>
@@ -30,6 +31,5 @@
    
  
   </dependencies>
-
 
 </project>

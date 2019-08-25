@@ -1,10 +1,17 @@
 package com.github.renatogallis.kafka.tutorial2;
 
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.kafka.clients.producer.Callback;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
+import org.apache.kafka.common.serialization.StringSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,6 +36,7 @@ public class TwitterProducer {
 		String token="792793562064748544-e3SGSMqyuXCtZKGcsNMvji2AaCA4Ekv";
 		String secret="yTNktI3NXlM27ICIig9ZCjdioM4FQ9o59yLycqG0pOvTt";
 		
+		List<String> terms = Lists.newArrayList("Canada","Toronto","Montreal","Quebec");
 		
 	public static void main(String[] args) {
 	
@@ -45,7 +53,19 @@ public class TwitterProducer {
 		// Attempts to establish a connection.
 		client.connect();
 		//criar um kafka producer
+		KafkaProducer<String, String> producer = createKafkaProducer();
+		
+		//Adicionando shutdownhook
+		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+			
+			logger.info("Parando aplicação...");
+			logger.info("Parando conexão com o Twitter...");
+			client.stop();
+			logger.info("Fechando producer...");
+			producer.close();
+		} ));
 		//loop para mandar mensagens para o kafka
+		
 		while (!client.isDone()) {
 			  String msg = null; 
 			  try {
@@ -55,21 +75,31 @@ public class TwitterProducer {
 				  client.stop();
 			  }
 			  if(msg!= null) {
-				  logger.info(msg);	  
+				  logger.info(msg);
+				  producer.send(new ProducerRecord<String, String>("twitter_tweets",null, msg),new Callback() {
+					
+					@Override
+					public void onCompletion(RecordMetadata metadata, Exception e) {
+						if(e!= null) {
+							logger.error("Something bad happened",e);
+						}
+						
+					}
+				});
 			  }
 			  
 			}
 		logger.info("End of application");
 	}
 	
+
+   //Criando o client para o twitter
 	public Client createTwitterClient(BlockingQueue<String> msgQueue) {
-		
-		 
 		
 		Hosts hosebirdHosts = new HttpHosts(Constants.STREAM_HOST);
 		StatusesFilterEndpoint hosebirdEndpoint = new StatusesFilterEndpoint();
 		//List<Long> followings = Lists.newArrayList(1234L, 566788L);
-		List<String> terms = Lists.newArrayList("Brasil");
+		
 		//hosebirdEndpoint.followings(followings);
 		hosebirdEndpoint.trackTerms(terms);
 
@@ -87,5 +117,48 @@ public class TwitterProducer {
 				Client hosebirdClient = builder.build();
 				return hosebirdClient;
 				
+	}
+	
+	//Criando um kafkaProducer
+	public KafkaProducer<String, String> createKafkaProducer() {
+		// TODO Auto-generated method stub
+		
+		  String bootstrapServers = "127.0.0.1:9092";
+		
+		  
+		 // 1 - Fazer as propriedades do producer
+		    Properties properties = new Properties();
+		   //Configurando as propriedades do topico utilizando o ProducerConfig do pacote clients do kafka    
+		    properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers); //endereço do broker kafka
+		    properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());//Informando que o tipo de serializador é String ou seja vou mandar texto para o kafka
+		    properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());//Informando que o tipo de serializador é String ou seja vou mandar texto para o kafka
+		  
+		    //Proprieddes para um producer seguro
+		    properties.setProperty(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, "true");
+		    properties.setProperty(ProducerConfig.ACKS_CONFIG,"all");
+		    properties.setProperty(ProducerConfig.RETRIES_CONFIG,Integer.toString(Integer.MAX_VALUE));
+		    properties.setProperty(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION,"5");// se for kafka>1.0 então 5 se for menor 1
+		    
+		    // Configuração para dar alto rendimento do producer
+		    properties.setProperty(ProducerConfig.COMPRESSION_TYPE_CONFIG, "snappy");
+		    properties.setProperty(ProducerConfig.LINGER_MS_CONFIG,"20");//atraso para receber as mensagens quanto mais atrasar melhor o fator de compressão(fazer um micro-batch) atraso sempre em milesegundos
+		    properties.setProperty(ProducerConfig.BATCH_SIZE_CONFIG,Integer.toString(32*1024));//32KB tamanho do batch
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		 // 2 - Criar o producer
+		    //Crio um produtor com chave e valor sendo String e passo as configurações acima para o mesmo
+		    KafkaProducer<String, String> producer = new KafkaProducer<String, String>(properties);
+		return producer ;
 	}
 }

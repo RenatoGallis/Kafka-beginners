@@ -2,13 +2,8 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="spark.Spark"/>
 <fullyQualifiedTypeName name="org.apache.kafka.common.serialization.StringSerializer"/>
-<fullyQualifiedTypeName name="org.apache.kafka.clients.producer.ProducerConfig"/>
-<fullyQualifiedTypeName name="org.apache.kafka.clients.producer.KafkaProducer"/>
-<fullyQualifiedTypeName name="org.apache.kafka.clients.producer.ProducerRecord"/>
-<fullyQualifiedTypeName name="org.apache.kafka.clients.producer.Callback"/>
 <fullyQualifiedTypeName name="org.apache.kafka.clients.producer.RecordMetadata"/>
 <fullyQualifiedTypeName name="com.github.renatogallis.kafka.tutorial1.ProducerDemoWhitCallbacks"/>
-<fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="com.github.renatogallis.kafka.tutorial1.ConsumerDemo"/>
 <fullyQualifiedTypeName name="java.util.Properties"/>
 <fullyQualifiedTypeName name="org.apache.kafka.common.serialization.StringDeserializer"/>
@@ -23,8 +18,6 @@
 <fullyQualifiedTypeName name="com.github.renatogallis.kafka.tutorial1.ConsumerDemoThreads.ConsumerThreads"/>
 <fullyQualifiedTypeName name="java.util.concurrent.CountDownLatch"/>
 <fullyQualifiedTypeName name="com.github.renatogallis.kafka.tutorial1.ConsumerDemoThreads"/>
-<fullyQualifiedTypeName name="java.lang.Runtime"/>
-<fullyQualifiedTypeName name="java.lang.Thread"/>
 <fullyQualifiedTypeName name="org.apache.kafka.common.TopicPartition"/>
 <fullyQualifiedTypeName name="java.util.Arrays"/>
 <fullyQualifiedTypeName name="java.util.concurrent.LinkedBlockingQueue"/>
@@ -45,4 +38,11 @@
 <fullyQualifiedTypeName name="org.slf4j.Logger"/>
 <fullyQualifiedTypeName name="org.slf4j.LoggerFactory"/>
 <fullyQualifiedTypeName name="com.github.renatogallis.kafka.tutorial2.TwitterProducer"/>
+<fullyQualifiedTypeName name="org.apache.kafka.clients.producer.KafkaProducer"/>
+<fullyQualifiedTypeName name="org.apache.kafka.clients.producer.ProducerRecord"/>
+<fullyQualifiedTypeName name="org.apache.kafka.clients.producer.Callback"/>
+<fullyQualifiedTypeName name="java.lang.Runtime"/>
+<fullyQualifiedTypeName name="java.lang.Thread"/>
+<fullyQualifiedTypeName name="org.apache.kafka.clients.producer.ProducerConfig"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
 </qualifiedTypeNameHistroy>
